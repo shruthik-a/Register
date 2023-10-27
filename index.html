@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validation Form</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var dob = document.getElementById("dob").value;
+            var mobile = document.getElementById("mobile").value;
+            var email = document.getElementById("email").value;
+            var address = document.getElementById("address").value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var course = document.getElementById("course").value;
+
+            // Validation logic for name
+            if (name.trim() === "") {
+                alert("Name must not be empty");
+                return false;
+            }
+
+            // Validation logic for date of birth
+            if (dob.trim() === "") {
+                alert("Date of Birth must not be empty");
+                return false;
+            }
+
+            if (!/^\d{10}$/.test(mobile)) {
+                alert("Mobile Number must be a 10-digit number");
+                return false;
+            }
+
+            if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email)) {
+                alert("Please enter a valid email address");
+                return false;
+            }
+
+            if (address.trim() === "") {
+                alert("Address must not be empty");
+                return false;
+            }
+
+            if (gender === null) {
+                alert("Please select a gender");
+                return false;
+            }
+            if (course.trim() === "") {
+                alert("Course must not be empty");
+                return false;
+            }
+
+            return true; 
+        }   
+    </script>
+</head>
+<body>
+    <div class="header">
+        <img id="college-logo" src="logo.png" alt="College Logo">
+        <h2 id="college-name">Deva College of engineering</h2>
+    </div>
+    <div class="container">
+        <h1>Registration Form</h1>
+       <!--<form name="registrationForm" action="javascript:void(0);" onsubmit="validateForm(); return false;" method="post" enctype="multipart/form-data">-->
+        <form id="myForm" action="http://localhost:8070/register" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" name="dob" id="dob" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" name="mobile" id="mobile" pattern="[0-9]{10}" required>
+                <small>Enter a 10-digit mobile number.</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <small>Enter a valid email address (e.g., example@email.com).</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea name="address" id="address" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Gender:</label>
+                <input type="radio" name="gender" value="Male" required>Male
+                <input type="radio" name="gender" value="Female" required>Female
+                <input type="radio" name="gender" value="Other" required>Other
+            </div>
+            <div class="form-group">
+                <label for="course">Course:</label>
+                <input type="text" name="course" id="course" required>
+            </div>
+            <div class="centered-buttons">
+                <input type="submit" value="Submit" onclick="submitForm();">
+                <input type="button" value="Show Users" onclick="showUsers()">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
